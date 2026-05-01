@@ -1,0 +1,11 @@
+Alice, 95
+Charlie, 70
+David, 80
+Eve, 90
+Frank, 85
+Heidi, 88
+Ivan, 65
+Judy, 82
+Kevin, 75
+Leo, 90
+Mallory, 85

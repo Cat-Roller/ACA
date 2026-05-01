@@ -1,0 +1,10 @@
+Alice, 90
+Bob, 80
+David, 75
+Eve, 88
+Frank, 92
+Grace, 100
+Ivan, 60
+Judy, 85
+Kevin, 70
+Leo, 95

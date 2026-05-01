@@ -1,0 +1,1 @@
+These two weeks we've worked with DBeaver and explored SQL

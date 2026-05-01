@@ -1,0 +1,21 @@
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+displacement = np.random.randint(1000, 6000, 100)
+speed = displacement / 30 + np.random.normal(0, 5, 100)
+
+X = np.column_stack((speed, displacement))
+
+pca_raw = PCA()
+pca_raw.fit(X)
+
+print("pca without scaling:", pca_raw.components_)
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+pca_scaled = PCA()
+pca_scaled.fit(X_scaled)
+
+print("pca with scaling:", pca_scaled.components_)
