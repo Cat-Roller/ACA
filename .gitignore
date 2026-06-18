@@ -1,1 +1,7 @@
 .venv/
+*.jpg
+*.txt
+*.pt
+*.yaml
+runs/
+*.cache
