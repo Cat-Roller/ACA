@@ -17,6 +17,7 @@ model = Sequential([
 
     Flatten(),
 
+    #this 400 neuron layer may be removed
     Dense(400, activation='relu'),
     Dropout(0.2),
 
