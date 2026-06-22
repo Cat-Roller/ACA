@@ -10,34 +10,36 @@ from torch.nn import Linear
 
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD  = [0.229, 0.224, 0.225]
+root_path=r"C:\Users\Aim\OneDrive\Рабочий стол\ACA"
 
-preprocess = transforms.Compose([
-    transforms.Resize((224,224)),
-    transforms.ToTensor(),
-    transforms.Normalize(IMAGENET_MEAN,IMAGENET_STD)]
-)
+def get_transform(img_size):
+    return transforms.Compose([
+        transforms.Resize((img_size, img_size)),
+        transforms.ToTensor(),
+        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD)
+    ])
 
-preprocess_299 = transforms.Compose(
-   [ transforms.Resize((299,299)),
-    transforms.ToTensor(),
-    transforms.Normalize(IMAGENET_MEAN,IMAGENET_STD)]
-)
+def load_dataset(root, img_size):
+    transform = get_transform(img_size)
+    dataset = Caltech101(root=root,download=False,transform=transform)
 
-dataset_224 = Caltech101(root=r'C:\Users\Aim\OneDrive\Рабочий стол\ACA', download=False, transform=preprocess)
-dataset_299 = Caltech101(root=r'C:\Users\Aim\OneDrive\Рабочий стол\ACA', download=False, transform=preprocess_299)
+    return dataset
 
+def build_loaders(root, img_size, batch_size=128, train_ratio = 0.8):
+    dataset = load_dataset(root, img_size)
 
-train_size = int(0.8 * len(dataset_224))
-val_size = len(dataset_224) - train_size
+    train_size = int(train_ratio * len(dataset))
+    val_size = len(dataset) - train_size
 
-train_224, val_224 = random_split(dataset_224, [train_size, val_size])
-train_299, val_299 = random_split(dataset_299, [train_size, val_size])
+    train_set, val_set = random_split(dataset, [train_size, val_size])
 
-train_loader_224 = DataLoader(train_224, batch_size=128, shuffle=True)
-val_loader_224   = DataLoader(val_224, batch_size=128)
+    train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_set, batch_size=batch_size)
 
-train_loader_299 = DataLoader(train_299, batch_size=128, shuffle=True)
-val_loader_299   = DataLoader(val_299, batch_size=128)
+    return train_loader, val_loader
+
+train_224, val_224 = build_loaders(root_path, 224)
+train_299, val_299 = build_loaders(root_path, 299)
 
 FCN = Sequential([
     Flatten(),
