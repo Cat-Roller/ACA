@@ -94,3 +94,7 @@ Inception_v3.fc = Linear(Inception_v3.fc.in_features, 101)
 MobileNet_v2.classifier[1] = Linear(MobileNet_v2.last_channel, 101)
 EfficientNet_b0.classifier[1] = Linear(EfficientNet_b0.classifier[1].in_features,101)
 
+def train_last_layer(model,train_data,validation_data):
+    model.fit(train_data)
+    result = model.validate(validation_data)
+    return result

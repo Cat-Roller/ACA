@@ -6,3 +6,5 @@
 runs/
 *.cache
 caltech101/*
+catboost_info/*
+movie_reccomendation_data/*

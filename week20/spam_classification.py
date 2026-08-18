@@ -61,7 +61,7 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 
 transformer = TfidfVectorizer(stop_words='english')
 
-X_train_tfidf = transformer.fit_transform(X_train).todense()
+X_train_tfidf = transformer.fit_transform(X_train)
 X_test_tfidf  = transformer.transform(X_test)
 
 model = MultinomialNB()
